@@ -1,0 +1,8 @@
+name: JJCooleyQuests
+version: 1.0
+description: Quests module for JJCooley
+author: JJCooley
+website: https://jacksonjude.com
+
+main: com.jacksonjude.JJCooleyQuests
+depend: [Quests]
