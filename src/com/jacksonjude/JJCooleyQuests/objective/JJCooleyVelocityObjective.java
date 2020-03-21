@@ -1,6 +1,7 @@
 package com.jacksonjude.JJCooleyQuests.objective;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -22,8 +23,8 @@ public class JJCooleyVelocityObjective extends CustomObjective {
 	{
 		this.setName("Velocity");
     	this.setAuthor("JJCooley");
-        this.setShowCount(true);
-        this.setCountPrompt("Velocity:");
+        
+    	this.addStringPrompt("Velocity", "Velocity:", "2");
 	}
 	
 	@EventHandler
@@ -47,10 +48,16 @@ public class JJCooleyVelocityObjective extends CustomObjective {
 		Quester quester = quests.getQuester(player.getUniqueId());
 		
 		for (Quest q : quester.getCurrentQuests().keySet()) {
-			int oldCount = 0;
-			if (quester.getQuestData(q).customObjectiveCounts.containsKey(this.getName()))
-				oldCount = quester.getQuestData(q).customObjectiveCounts.get(this.getName());
-			incrementObjective(player, this, (int) (velocity-oldCount), q);
+			Map<String, Object> map = getDataForPlayer(player, this, q);
+			
+			if (map == null || map.get("Velocity") == null) { continue; }
+			
+			int velocityNeeded = Integer.parseInt((String) map.get("Velocity"));
+			
+			if (velocity >= velocityNeeded)
+			{
+				incrementObjective(player, this, 1, q);
+			}
 		}
 	}
 }

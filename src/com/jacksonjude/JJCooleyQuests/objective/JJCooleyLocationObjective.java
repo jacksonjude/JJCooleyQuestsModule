@@ -41,7 +41,7 @@ public class JJCooleyLocationObjective extends CustomObjective {
 		for (Quest q : quester.getCurrentQuests().keySet()) {
 			Map<String, Object> map = getDataForPlayer(player, this, q);
 			
-			if (map == null || map.get("XPos") == null || map.get("YPos") == null || map.get("XPos") == null) { continue; }
+			if (map == null || map.get("XPos") == null || map.get("YPos") == null || map.get("ZPos") == null) { continue; }
 			
 			int xNeeded = Integer.valueOf((String) map.get("XPos"));
 			int yNeeded = Integer.valueOf((String) map.get("YPos"));
